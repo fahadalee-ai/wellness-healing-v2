@@ -4,6 +4,7 @@ import { AuthInput, AuthShell, PasswordField, SocialAuth } from "@/components/Au
 import { Button, Field } from "@/components/kit";
 import { PHOTOS } from "@/lib/images";
 import { useApp } from "@/lib/store";
+import { useTheme } from "@/lib/theme";
 
 export const Route = createFileRoute("/login")({
   head: () => ({ meta: [{ title: "Log In — Wellness & Healing SF" }] }),
@@ -12,6 +13,7 @@ export const Route = createFileRoute("/login")({
 
 function LoginScreen() {
   const { login } = useApp();
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +28,7 @@ function LoginScreen() {
       title="Welcome Back"
       subtitle="Log in to continue your journey"
       background={PHOTOS.windowPortrait}
-      logoClassName="h-28 w-28"
+      logoClassName={theme === "dark" ? "h-32 w-32" : "h-32 w-32 origin-center scale-[1.7]"}
       showBack={false}
       fallbackTo="/onboarding"
     >
