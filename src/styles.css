@@ -55,9 +55,9 @@
   --stone: #c8bbaa;
   --mist: #8fa8b3;
   --sky: #d7e4ea;
-  --primary: #6e8b74;
+  --primary: #4f6d56;
   --primary-foreground: #f7f3ec;
-  --primary-dark: #5a745f;
+  --primary-dark: #3f5845;
   --accent: #d7e4ea;
   --accent-foreground: #2f3a3d;
   --ink: #2c322c;
@@ -71,8 +71,8 @@
   --secondary: #e8efe8;
   --secondary-foreground: #2c322c;
   --muted: #ebe4d8;
-  --muted-foreground: #6d6a62;
-  --dim: #8a857c;
+  --muted-foreground: #4e4b45;
+  --dim: #615e57;
   --destructive: #c4786a;
   --destructive-foreground: #fffdf9;
   --success: #6e8b74;
@@ -116,8 +116,8 @@
   --secondary: #2a322c;
   --secondary-foreground: #ece6dc;
   --muted: #323832;
-  --muted-foreground: #b3aea4;
-  --dim: #9a948c;
+  --muted-foreground: #c9c3b8;
+  --dim: #b8b2a8;
   --destructive: #c4786a;
   --destructive-foreground: #ece6dc;
   --success: #8fa888;
@@ -233,6 +233,38 @@
   }
 }
 
+@keyframes splash-logo-in {
+  from {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes splash-logo-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+@keyframes splash-wordmark-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -255,6 +287,16 @@
 
 .animate-splash {
   animation: splash-fade 800ms ease-out both;
+}
+
+.animate-splash-logo {
+  animation:
+    splash-logo-in 900ms cubic-bezier(0.22, 1, 0.36, 1) both,
+    splash-logo-breathe 3.6s ease-in-out 900ms infinite;
+}
+
+.animate-splash-wordmark {
+  animation: splash-wordmark-in 700ms ease-out 280ms both;
 }
 
 .animate-fade-up {

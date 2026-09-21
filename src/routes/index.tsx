@@ -54,10 +54,16 @@ function SplashScreen() {
         alt="Sunroom window with plants and warm daylight"
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/55 to-background" />
-      <div className="relative z-10 animate-splash flex flex-col items-center">
-        <Logo className="h-64 w-64" />
-        <Wordmark className="mt-3 text-foreground" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/15 via-background/30 to-background/75" />
+      <div className="relative z-10 flex flex-col items-center">
+        <div className="animate-splash-logo relative flex h-80 w-80 items-center justify-center overflow-hidden rounded-full bg-card shadow-soft">
+          <Logo
+            variant="sage"
+            knockOut={false}
+            className="h-[140%] w-[140%] max-w-none object-contain"
+          />
+        </div>
+        <Wordmark className="animate-splash-wordmark mt-5 text-sm font-semibold tracking-[0.18em] text-foreground" />
         {ready && !hydrated && (
           <p className="mt-6 text-[12px] uppercase tracking-[0.16em] text-muted-foreground">Opening your space…</p>
         )}

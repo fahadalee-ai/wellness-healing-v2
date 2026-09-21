@@ -36,7 +36,7 @@ function OnboardingScreen() {
       }}
     >
       <img src={slide.image} alt={slide.alt} className="absolute inset-0 h-full w-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/35 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/25 via-background/55 to-background" />
 
       <div className="absolute right-5 top-[max(1.25rem,env(safe-area-inset-top))] z-10 flex items-center gap-2">
         <ThemeToggle />
@@ -52,7 +52,7 @@ function OnboardingScreen() {
       <div className="relative z-10 flex min-h-dvh flex-col justify-end px-5 pb-[max(1.75rem,env(safe-area-inset-bottom))]">
         <div key={step} className="animate-fade-up">
           <h1 className="font-display text-[2rem] leading-tight text-foreground">{slide.heading}</h1>
-          <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-muted-foreground">{slide.subtext}</p>
+          <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-foreground/80">{slide.subtext}</p>
         </div>
 
         <PageDots count={ONBOARDING.length} index={step} onChange={setStep} label="Go to slide" />

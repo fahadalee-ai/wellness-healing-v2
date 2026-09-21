@@ -42,7 +42,7 @@ export function AuthShell({
           className="absolute inset-0 h-full w-full object-cover object-[center_16%]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background" />
-        <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-5 pt-[max(0.85rem,env(safe-area-inset-top))]">
+        <div className="absolute inset-x-0 top-0 z-10 flex items-center px-5 pt-[max(0.85rem,env(safe-area-inset-top))]">
           {showBack ? (
             <button
               type="button"
@@ -53,9 +53,11 @@ export function AuthShell({
               <ArrowLeft size={18} strokeWidth={1.75} />
             </button>
           ) : (
-            <div className="h-11 w-11" />
+            <span className="h-11 w-11" />
           )}
-          <ThemeToggle className="h-11 w-11" />
+          <div className="ml-auto">
+            <ThemeToggle className="h-11 w-11" />
+          </div>
         </div>
       </div>
 
@@ -63,7 +65,7 @@ export function AuthShell({
         {showLogo && (
           <div className="mb-2 flex flex-col items-center">
             <Logo className={logoClassName} />
-            <Wordmark className="-mt-0.5" />
+            <Wordmark className="-mt-0.5 text-foreground" />
           </div>
         )}
 
@@ -73,7 +75,7 @@ export function AuthShell({
         {subtitle && (
           <p className="mx-auto mt-1 max-w-xs text-center text-sm leading-snug text-muted-foreground">{subtitle}</p>
         )}
-        <div className="mt-4 rounded-3xl border border-border/80 bg-card/85 p-4 shadow-soft backdrop-blur-md">
+        <div className="mt-4 rounded-3xl border border-border bg-card p-4 shadow-soft">
           {children}
         </div>
         {footer}

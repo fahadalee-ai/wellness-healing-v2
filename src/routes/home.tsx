@@ -45,7 +45,7 @@ function HomeScreen() {
           <p className="font-display text-[1.35rem] leading-tight text-foreground">
             {greeting()}, {name}
           </p>
-          <p className="mt-1 text-sm text-muted-foreground">Here’s your space to grow</p>
+          <p className="mt-1 text-sm text-foreground/75">Here’s your space to grow</p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
           <ThemeToggle />
@@ -61,10 +61,11 @@ function HomeScreen() {
       </div>
 
       <div className="relative mt-7 overflow-hidden rounded-3xl">
-        <img src={PHOTOS.heroInterior} alt="Woman seated on a sunroom window ledge" className="h-52 w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/15 to-transparent" />
+        <img src={PHOTOS.heroInterior} alt="Woman seated on a sunroom window ledge" className="h-56 w-full object-cover object-[center_20%]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/55 to-ink/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
         <div className="absolute inset-0 flex flex-col justify-end p-5">
-          <h2 className="font-display text-xl leading-snug text-cream">
+          <h2 className="max-w-[15rem] font-display text-xl leading-snug text-white">
             A Path Toward Healing, Clarity & Transformation
           </h2>
           <Button className="mt-4 w-auto self-start px-6" onClick={() => navigate({ to: "/book" })}>
@@ -127,7 +128,7 @@ function HomeScreen() {
             className="flex flex-col items-center gap-2 rounded-2xl border border-border/80 bg-card px-1.5 py-3 text-center shadow-soft"
           >
             <item.icon size={18} className="text-primary" strokeWidth={1.6} />
-            <span className="whitespace-nowrap text-[10px] leading-none text-muted-foreground">{item.label}</span>
+            <span className="whitespace-nowrap text-[11px] font-medium leading-none text-foreground/80">{item.label}</span>
           </Link>
         ))}
       </div>
@@ -145,7 +146,7 @@ function HomeScreen() {
           >
             <div>
               <p className="font-medium text-foreground">{service.title}</p>
-              <p className="mt-1 text-xs text-muted-foreground">{service.blurb}</p>
+              <p className="mt-1 text-xs leading-relaxed text-foreground/75">{service.blurb}</p>
             </div>
             <span className="ml-3 shrink-0 rounded-full bg-primary px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-primary-foreground">
               Book Now
@@ -161,7 +162,7 @@ function HomeScreen() {
             <img src={p.image} alt={p.title} className="h-28 w-full object-cover" />
             <div className="p-3">
               <p className="text-sm font-medium text-foreground">{p.title}</p>
-              <p className="mt-1 text-xs text-muted-foreground">{p.blurb}</p>
+              <p className="mt-1 text-xs leading-relaxed text-foreground/75">{p.blurb}</p>
             </div>
           </Card>
         ))}
@@ -189,7 +190,7 @@ function HomeScreen() {
               <Stars rating={TESTIMONIALS[quote].rating} />
             </div>
           </div>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">“{TESTIMONIALS[quote].quote}”</p>
+          <p className="mt-3 text-sm leading-relaxed text-foreground/80">“{TESTIMONIALS[quote].quote}”</p>
         </Card>
         <PageDots count={TESTIMONIALS.length} index={quote} onChange={setQuote} label="Testimonial" />
       </div>
@@ -213,7 +214,7 @@ function HomeScreen() {
               <div className="min-w-0 flex-1 px-4 py-3.5">
                 <p className="text-[11px] uppercase tracking-[0.14em] text-primary">{item.category}</p>
                 <p className="mt-1 font-medium leading-snug">{item.title}</p>
-                <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{item.excerpt}</p>
+                <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-foreground/75">{item.excerpt}</p>
               </div>
             </Card>
           </Link>

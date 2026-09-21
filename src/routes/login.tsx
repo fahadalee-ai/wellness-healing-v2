@@ -26,7 +26,8 @@ function LoginScreen() {
       title="Welcome Back"
       subtitle="Log in to continue your journey"
       background={PHOTOS.windowPortrait}
-      logoClassName="h-[4.25rem] w-[4.25rem]"
+      logoClassName="h-28 w-28"
+      showBack={false}
       fallbackTo="/onboarding"
     >
       <form

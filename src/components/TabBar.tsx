@@ -33,7 +33,7 @@ export function TabBar() {
                 to={tab.to}
                 className={cn(
                   "relative flex min-h-12 flex-col items-center justify-center gap-1 py-0.5",
-                  active ? "text-primary" : "text-foreground/55",
+                  active ? "text-primary" : "text-foreground/75",
                 )}
               >
                 <span

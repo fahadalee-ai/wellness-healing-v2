@@ -27,7 +27,7 @@ export function Logo({
 
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <p className={cn("text-[10px] font-medium uppercase tracking-[0.28em] text-muted-foreground", className)}>
+    <p className={cn("text-[11px] font-semibold uppercase tracking-[0.22em] text-foreground", className)}>
       Wellness & Healing SF
     </p>
   );
