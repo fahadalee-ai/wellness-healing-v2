@@ -19,8 +19,8 @@ export function TabBar() {
   const unread = CHAT_THREADS.some((thread) => threadUnread(messages, thread.id));
 
   return (
-    <nav className="fixed bottom-0 left-1/2 z-40 w-full max-w-[480px] -translate-x-1/2 border-t border-border bg-background pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-1.5">
-      <ul className="grid grid-cols-5">
+    <nav className="fixed bottom-0 left-1/2 z-40 w-full max-w-[480px] -translate-x-1/2 border-t border-primary/15 bg-tabbar pb-[max(0.6rem,env(safe-area-inset-bottom))] pt-2.5 shadow-[0_-10px_28px_rgba(80,72,58,0.08)]">
+      <ul className="grid grid-cols-5 px-1.5">
         {TABS.map((tab) => {
           const active =
             pathname === tab.to ||
@@ -32,17 +32,24 @@ export function TabBar() {
               <Link
                 to={tab.to}
                 className={cn(
-                  "relative flex min-h-12 flex-col items-center justify-center gap-1 py-2 text-[11px] uppercase tracking-[0.12em]",
-                  active ? "text-primary" : "text-muted-foreground",
+                  "relative flex min-h-12 flex-col items-center justify-center gap-1 py-0.5",
+                  active ? "text-primary" : "text-foreground/55",
                 )}
               >
-                <span className="relative">
-                  <Icon size={20} strokeWidth={active ? 1.9 : 1.5} />
+                <span
+                  className={cn(
+                    "relative flex h-8 w-8 items-center justify-center rounded-full transition-colors",
+                    active ? "bg-primary text-primary-foreground" : "bg-transparent",
+                  )}
+                >
+                  <Icon size={18} strokeWidth={active ? 2.1 : 1.7} />
                   {tab.to === "/messages" && unread && (
-                    <span className="absolute -right-1 -top-0.5 h-1.5 w-1.5 bg-primary" />
+                    <span className="absolute right-0 top-0 h-1.5 w-1.5 rounded-full bg-primary" />
                   )}
                 </span>
-                {tab.label}
+                <span className={cn("text-[11px] font-medium leading-none", active && "text-primary")}>
+                  {tab.label}
+                </span>
               </Link>
             </li>
           );

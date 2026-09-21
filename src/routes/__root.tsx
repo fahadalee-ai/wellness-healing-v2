@@ -14,6 +14,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AppProvider } from "../lib/store";
+import { ThemeProvider } from "../lib/theme";
 import { AppShell } from "../components/AppShell";
 import { PhonePreview } from "../components/PhonePreview";
 import { asset } from "../lib/utils";
@@ -38,7 +39,7 @@ function NotFoundComponent() {
         <div className="mt-6">
           <Link
             to="/home"
-            className="inline-flex min-h-12 w-full items-center justify-center bg-primary px-4 text-[12px] uppercase tracking-[0.16em] text-primary-foreground"
+            className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-primary px-4 text-[12px] uppercase tracking-[0.14em] text-primary-foreground"
           >
             Go home
           </Link>
@@ -69,13 +70,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex min-h-12 items-center justify-center bg-primary px-4 text-[12px] uppercase tracking-[0.16em] text-primary-foreground"
+            className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-4 text-[12px] uppercase tracking-[0.14em] text-primary-foreground"
           >
             Try again
           </button>
           <a
             href="/"
-            className="inline-flex min-h-12 items-center justify-center border border-border px-4 text-[12px] uppercase tracking-[0.16em] text-foreground"
+            className="inline-flex min-h-12 items-center justify-center rounded-full border border-border px-4 text-[12px] uppercase tracking-[0.14em] text-foreground"
           >
             Go home
           </a>
@@ -101,7 +102,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#141312" },
+      { name: "theme-color", content: "#F6F3EC" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -142,11 +143,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AppProvider>
-        <AppShell>
-          <Outlet />
-        </AppShell>
-      </AppProvider>
+      <ThemeProvider>
+        <AppProvider>
+          <AppShell>
+            <Outlet />
+          </AppShell>
+        </AppProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

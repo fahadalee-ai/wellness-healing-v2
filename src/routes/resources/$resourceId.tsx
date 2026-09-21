@@ -40,14 +40,14 @@ function ResourceDetailScreen() {
             type="button"
             aria-label={saved ? "Remove from saved" : "Save resource"}
             onClick={() => toggleSavedResource(resource.id)}
-            className="flex h-12 w-12 items-center justify-center border border-border text-primary"
+            className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-card text-primary"
           >
             <Bookmark size={18} fill={saved ? "currentColor" : "none"} />
           </button>
         }
       />
 
-      <img src={resource.image} alt={resource.alt} className="-mx-5 mb-5 h-52 w-[calc(100%+2.5rem)] object-cover" />
+      <img src={resource.image} alt={resource.alt} className="-mx-5 mb-5 h-52 w-[calc(100%+2.5rem)] rounded-none object-cover" />
 
       <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.14em] text-primary">
         <span>{resource.category}</span>
@@ -59,7 +59,7 @@ function ResourceDetailScreen() {
 
       <div className="mt-5 space-y-4">
         {resource.body.map((paragraph) => (
-          <p key={paragraph} className="text-sm leading-relaxed text-cream/90">
+          <p key={paragraph} className="text-sm leading-relaxed text-muted-foreground">
             {paragraph}
           </p>
         ))}
@@ -101,13 +101,15 @@ function ResourceDetailScreen() {
       {related.length > 0 && (
         <div className="mt-10">
           <h2 className="font-display text-xl">Related</h2>
-          <div className="mt-3 space-y-2">
+          <div className="mt-3 space-y-3">
             {related.map((item) =>
               item ? (
-                <Link key={item.id} to="/resources/$resourceId" params={{ resourceId: item.id }}>
-                  <Card className="flex gap-3 overflow-hidden p-0">
-                    <img src={item.image} alt="" className="h-20 w-20 object-cover" />
-                    <div className="min-w-0 flex-1 py-3 pr-3">
+                <Link key={item.id} to="/resources/$resourceId" params={{ resourceId: item.id }} className="block">
+                  <Card className="flex p-0">
+                    <div className="h-20 w-20 shrink-0 overflow-hidden">
+                      <img src={item.image} alt="" className="h-full w-full object-cover" />
+                    </div>
+                    <div className="min-w-0 flex-1 px-4 py-3">
                       <p className="text-[11px] uppercase tracking-[0.14em] text-primary">{item.category}</p>
                       <p className="mt-1 truncate font-medium">{item.title}</p>
                     </div>

@@ -61,7 +61,7 @@ function PracticeScreen() {
         Step {String(step + 1).padStart(2, "0")}
       </p>
       <h2 className="mt-2 font-display text-3xl">{current.title}</h2>
-      <p className="mt-4 text-sm leading-relaxed text-cream/90">{current.body}</p>
+      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{current.body}</p>
       <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
         You can stop at any step. Nothing here has to be finished.
       </p>

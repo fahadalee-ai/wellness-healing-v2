@@ -26,7 +26,7 @@ function LoginScreen() {
       title="Welcome Back"
       subtitle="Log in to continue your journey"
       background={PHOTOS.windowPortrait}
-      logoClassName="h-36 w-36"
+      logoClassName="h-[4.25rem] w-[4.25rem]"
       fallbackTo="/onboarding"
     >
       <form
@@ -52,7 +52,7 @@ function LoginScreen() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div className="mb-6 flex justify-end">
+        <div className="mb-4 flex justify-end">
           <Link to="/forgot-password" className="text-sm text-primary">
             Forgot Password?
           </Link>
@@ -60,7 +60,13 @@ function LoginScreen() {
         <Button type="submit" full>
           Log In
         </Button>
-        <p className="mt-3 text-center text-xs leading-relaxed text-cream/80">
+        <p className="mt-3 text-center text-sm text-muted-foreground">
+          Don’t have an account?{" "}
+          <Link to="/register" className="font-medium text-primary">
+            Sign Up
+          </Link>
+        </p>
+        <p className="mt-2 text-center text-xs leading-relaxed text-muted-foreground">
           Demo — any details continue
         </p>
       </form>
@@ -70,14 +76,6 @@ function LoginScreen() {
           enter("elena@wellnesshealingsf.com", "Healing1");
         }}
       />
-
-      <p className="mt-8 text-center text-sm text-cream">Don’t have an account?</p>
-      <Link
-        to="/register"
-        className="mt-2 inline-flex min-h-12 w-full items-center justify-center border border-white bg-[#141312]/70 px-4 text-[12px] font-medium uppercase tracking-[0.16em] text-white"
-      >
-        Sign Up
-      </Link>
     </AuthShell>
   );
 }

@@ -49,7 +49,7 @@ function IntakeScreen() {
             type="button"
             aria-label="Go back"
             onClick={() => setStep((s) => s - 1)}
-            className="flex h-12 w-12 items-center justify-center border border-white text-white"
+            className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-card text-foreground"
           >
             <ArrowLeft size={18} strokeWidth={1.75} />
           </button>
@@ -67,7 +67,7 @@ function IntakeScreen() {
           <Question title="What brings you here today?">
             <ChoiceList options={INTAKE_REASONS} value={reason} onChange={setReason} />
             {reason === "Personal/Trauma Healing" && (
-              <p className="mt-4 text-sm leading-relaxed text-cream">
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                 This is coaching, not a crisis line. If you are in danger, call {BUSINESS.phone} or local
                 emergency services.
               </p>
@@ -106,7 +106,7 @@ function IntakeScreen() {
           <button
             type="button"
             onClick={next}
-            className="mt-3 w-full py-3 text-center text-[12px] uppercase tracking-[0.14em] text-cream"
+            className="mt-3 w-full py-3 text-center text-[12px] uppercase tracking-[0.14em] text-muted-foreground"
           >
             Skip
           </button>
@@ -138,7 +138,7 @@ function Question({
   return (
     <>
       <h1 className="font-display text-[1.85rem] leading-tight text-foreground">{title}</h1>
-      {optional && <p className="mt-2 text-sm text-cream">Optional — skip if you’d rather not say.</p>}
+      {optional && <p className="mt-2 text-sm text-muted-foreground">Optional — skip if you’d rather not say.</p>}
       <div className="mt-6">{children}</div>
     </>
   );
@@ -165,8 +165,8 @@ function ChoiceList({
             type="button"
             onClick={() => onChange(opt)}
             className={cn(
-              "flex min-h-12 w-full items-center justify-between border px-4 py-3 text-left text-sm transition-colors duration-200",
-              selected ? "border-primary bg-primary/10 text-foreground" : "border-border bg-card text-cream",
+              "flex min-h-12 w-full items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm transition-colors duration-200",
+              selected ? "border-primary bg-primary/10 text-foreground" : "border-border bg-card text-foreground",
             )}
           >
             {opt}

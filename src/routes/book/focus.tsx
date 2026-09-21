@@ -30,16 +30,16 @@ function FocusScreen() {
         </div>
 
         <Card className="mt-6 flex gap-4">
-          <img src={COACH.photo} alt={COACH.name} className="h-20 w-20 object-cover" />
+          <img src={COACH.photo} alt={COACH.name} className="h-20 w-20 rounded-2xl object-cover" />
           <div>
             <p className="font-display text-xl">{COACH.name}</p>
             <p className="mt-1 text-xs text-muted-foreground">{COACH.credentials}</p>
-            <p className="mt-2 text-sm leading-relaxed text-cream/90">{COACH.bio}</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{COACH.bio}</p>
           </div>
         </Card>
         <div className="mt-3 grid grid-cols-3 gap-2 text-center">
           {COACH.stats.map((stat) => (
-            <div key={stat.label} className="border border-border bg-card px-2 py-3">
+            <div key={stat.label} className="rounded-2xl border border-border bg-card px-2 py-3">
               <p className="font-display text-lg text-primary">{stat.value}</p>
               <p className="mt-1 text-[10px] uppercase tracking-[0.1em] text-muted-foreground">{stat.label}</p>
             </div>

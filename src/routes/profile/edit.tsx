@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LanguagePicker, type LanguageId } from "@/components/LanguagePicker";
-import { Button, Field, Header, Input, Screen } from "@/components/kit";
+import { Button, Field, Header, Input, Screen, SoftSwitch } from "@/components/kit";
 import { PasswordField } from "@/components/AuthShell";
 import { useApp } from "@/lib/store";
 import { useState } from "react";
@@ -50,7 +50,7 @@ function EditProfileScreen() {
       />
 
       <h2 className="mb-3 mt-2 font-display text-xl">Notification preferences</h2>
-      <div className="divide-y divide-border border border-border">
+      <div className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card/90">
         {prefs.map((p) => (
           <button
             key={p.key}
@@ -61,9 +61,7 @@ function EditProfileScreen() {
             className="flex min-h-12 w-full items-center justify-between px-4 py-3 text-left"
           >
             <span className="text-sm">{p.label}</span>
-            <span className={`h-5 w-9 p-0.5 ${user?.prefs[p.key] ? "bg-primary" : "bg-muted"}`}>
-              <span className={`block h-4 w-4 bg-cream transition-transform ${user?.prefs[p.key] ? "translate-x-4" : ""}`} />
-            </span>
+            <SoftSwitch checked={!!user?.prefs[p.key]} />
           </button>
         ))}
       </div>

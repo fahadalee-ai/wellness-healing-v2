@@ -22,7 +22,7 @@ function NotificationsScreen() {
           </button>
         }
       />
-      <div className="divide-y divide-border border border-border">
+      <div className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card/90 shadow-soft">
         {notifications.map((n) => (
           <Link
             key={n.id}
@@ -32,7 +32,7 @@ function NotificationsScreen() {
           >
             <div className="flex items-start justify-between gap-3">
               <p className={cn("text-sm", n.read ? "text-muted-foreground" : "text-foreground")}>{n.title}</p>
-              {!n.read && <span className="mt-1 h-1.5 w-1.5 shrink-0 bg-primary" />}
+              {!n.read && <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />}
             </div>
             <p className="mt-1 text-sm text-muted-foreground">{n.text}</p>
             <p className="mt-2 text-[11px] uppercase tracking-[0.12em] text-muted-foreground">{n.time}</p>

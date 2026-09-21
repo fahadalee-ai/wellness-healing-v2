@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Button, FadeIn, Field, Header, SaveLater, Screen, Textarea } from "@/components/kit";
+import { Button, FadeIn, Field, Header, SaveLater, Screen, SoftSwitch, Textarea } from "@/components/kit";
 import { useApp } from "@/lib/store";
 
 export const Route = createFileRoute("/book/notes")({
@@ -28,16 +28,14 @@ function NotesScreen() {
         <button
           type="button"
           onClick={() => setDraft({ firstSession: !first })}
-          className="flex min-h-12 w-full items-center justify-between border border-border bg-card px-4"
+          className="flex min-h-12 w-full items-center justify-between rounded-2xl border border-border bg-card px-4"
         >
           <span className="text-sm">This is my first session</span>
-          <span className={`h-5 w-9 p-0.5 transition-colors ${first ? "bg-primary" : "bg-muted"}`}>
-            <span className={`block h-4 w-4 bg-cream transition-transform ${first ? "translate-x-4" : ""}`} />
-          </span>
+          <SoftSwitch checked={first} />
         </button>
 
         {first && (
-          <p className="mt-3 border border-border bg-card px-4 py-3 text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-3 rounded-2xl border border-border bg-card px-4 py-3 text-sm leading-relaxed text-muted-foreground">
             First sessions run 15 minutes longer at no extra cost.
           </p>
         )}

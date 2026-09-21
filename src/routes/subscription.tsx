@@ -69,7 +69,7 @@ function SubscriptionScreen() {
       </div>
 
       <h2 className="mb-3 mt-8 font-display text-xl">Billing history</h2>
-      <div className="divide-y divide-border border border-border">
+      <div className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card/90 shadow-soft">
         {invoices.map((inv) => (
           <div key={inv.id} className="flex items-center justify-between px-4 py-4">
             <div>

@@ -19,14 +19,14 @@ export function PhonePreview() {
   }, []);
 
   return (
-    <div className="grid-bg flex min-h-dvh items-center justify-center overflow-hidden bg-[#0b0b0c] p-4">
+    <div className="grid-bg flex min-h-dvh items-center justify-center overflow-hidden bg-[#e8efe8] p-4">
       <div className="relative aspect-[9/19.5] h-[min(86vh,700px)] w-[min(92vw,340px)]">
-        <div className="absolute inset-0 rounded-[42px] bg-black ring-1 ring-white/15" />
-        <div className="absolute inset-[10px] overflow-hidden rounded-[34px] bg-[#141312]">
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-center justify-between px-6 pt-3 text-[13px] font-semibold text-[#F5F3EF]">
+        <div className="absolute inset-0 rounded-[42px] bg-[#1a1e1c] ring-1 ring-[#6e8b74]/25" />
+        <div className="absolute inset-[10px] overflow-hidden rounded-[34px] bg-[#f6f3ec]">
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-center justify-between px-6 pt-3 text-[13px] font-semibold text-[#2c322c]">
             <span>{time}</span>
-            <span className="absolute left-1/2 top-2 h-6 w-[88px] -translate-x-1/2 rounded-full bg-black" />
-            <span className="flex items-center gap-1.5 text-[#F5F3EF]" aria-hidden>
+            <span className="absolute left-1/2 top-2 h-6 w-[88px] -translate-x-1/2 rounded-full bg-[#1a1e1c]" />
+            <span className="flex items-center gap-1.5 text-[#2c322c]" aria-hidden>
               <svg width="17" height="12" viewBox="0 0 17 12" fill="currentColor">
                 <rect x="0" y="7" width="3" height="5" rx="0.5" />
                 <rect x="4.5" y="5" width="3" height="7" rx="0.5" />
@@ -48,19 +48,21 @@ export function PhonePreview() {
           <iframe
             title="Wellness & Healing SF"
             src={appSrc()}
-            className="h-full w-full border-0 bg-[#141312]"
+            className="h-full w-full border-0 bg-[#f6f3ec]"
           />
           <div className="pointer-events-none absolute inset-x-0 bottom-2 z-10 flex justify-center">
-            <span className="h-1 w-28 rounded-full bg-[#F5F3EF]/55" />
+            <span className="h-1 w-28 rounded-full bg-[#2c322c]/40" />
           </div>
         </div>
       </div>
       <style>{`
         .grid-bg {
           background-image:
-            linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
-          background-size: 34px 34px;
+            radial-gradient(80% 60% at 10% 0%, rgba(143,168,179,0.28), transparent 55%),
+            radial-gradient(70% 50% at 100% 10%, rgba(110,139,116,0.22), transparent 50%),
+            linear-gradient(rgba(44,50,44,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(44,50,44,0.04) 1px, transparent 1px);
+          background-size: auto, auto, 34px 34px, 34px 34px;
         }
       `}</style>
     </div>

@@ -17,7 +17,7 @@ function DateScreen() {
       <Header title="Pick a Date" fallbackTo="/book" />
       <FadeIn>
         {draft.serviceId && draft.serviceId !== "one-on-one" && (
-          <p className="mb-4 text-sm leading-relaxed text-cream">
+          <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
             Group sessions skip a focus step — Jackie sets the room for everyone.
           </p>
         )}

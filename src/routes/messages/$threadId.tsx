@@ -81,7 +81,7 @@ function ChatScreen() {
             <button
               type="button"
               onClick={() => setInfo(true)}
-              className="overflow-hidden border border-border"
+              className="overflow-hidden rounded-2xl border border-border"
               aria-label={`${thread.title} details`}
             >
               <img src={thread.photo} alt="" className="h-12 w-12 object-cover" />
@@ -91,7 +91,7 @@ function ChatScreen() {
       </div>
 
       {thread.kind === "coach" && (
-        <div className="mx-5 mb-3 border border-border bg-card px-3 py-2 text-center text-[11px] leading-relaxed text-muted-foreground">
+        <div className="mx-5 mb-3 rounded-2xl border border-border bg-card px-3 py-2 text-center text-[11px] leading-relaxed text-muted-foreground">
           For urgent matters, please contact {BUSINESS.phone} directly — this is not a crisis line
         </div>
       )}
@@ -111,7 +111,7 @@ function ChatScreen() {
               <div className={cn("flex", msg.from === "me" ? "justify-end" : "justify-start")}>
                 <div
                   className={cn(
-                    "max-w-[80%] px-3 py-2 text-sm leading-relaxed",
+                    "max-w-[80%] rounded-2xl px-3 py-2 text-sm leading-relaxed",
                     msg.from === "me" ? "bg-primary text-primary-foreground" : "bg-card text-foreground",
                   )}
                 >
@@ -120,7 +120,7 @@ function ChatScreen() {
                     <Link
                       to="/resources/$resourceId"
                       params={{ resourceId: resource.id }}
-                      className="mt-2 block border border-primary-foreground/25 bg-[#141312]/20 p-2"
+                      className="mt-2 block rounded-xl border border-primary-foreground/25 bg-ink/20 p-2"
                     >
                       <p className="text-[10px] uppercase tracking-[0.14em] opacity-80">{resource.category}</p>
                       <p className="mt-1 font-medium">{resource.title}</p>
@@ -161,7 +161,7 @@ function ChatScreen() {
               key={item}
               type="button"
               onClick={() => send(item)}
-              className="shrink-0 border border-border bg-card px-3 py-2 text-xs text-foreground"
+              className="shrink-0 rounded-full border border-border bg-card px-3 py-2 text-xs text-foreground"
             >
               {item}
             </button>
@@ -181,13 +181,13 @@ function ChatScreen() {
           onChange={(e) => setText(e.target.value)}
           placeholder={thread.kind === "coach" ? "Write a note to Jackie…" : "Write a reply…"}
           rows={1}
-          className="max-h-32 min-h-12 flex-1 resize-none border border-border bg-card px-3 py-3 text-sm outline-none"
+          className="max-h-32 min-h-12 flex-1 resize-none rounded-2xl border border-border bg-card px-3 py-3 text-sm outline-none"
         />
         <button
           type="submit"
           aria-label="Send"
           disabled={!text.trim()}
-          className="flex h-12 w-12 items-center justify-center bg-primary text-primary-foreground disabled:opacity-40"
+          className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground disabled:opacity-40"
         >
           <Send size={16} />
         </button>
@@ -195,7 +195,7 @@ function ChatScreen() {
 
       <BottomSheet open={info} onClose={() => setInfo(false)} title={thread.title}>
         <div className="flex items-center gap-3">
-          <img src={thread.photo} alt="" className="h-16 w-16 object-cover" />
+          <img src={thread.photo} alt="" className="h-16 w-16 rounded-2xl object-cover" />
           <div>
             <p className="text-sm text-muted-foreground">
               {thread.kind === "coach" ? COACH.credentials : thread.subtitle}
@@ -213,7 +213,7 @@ function ChatScreen() {
           )}
           <a
             href={BUSINESS.phoneHref}
-            className="inline-flex min-h-12 w-full items-center justify-center border border-border text-[12px] uppercase tracking-[0.16em]"
+            className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-border text-[12px] uppercase tracking-[0.14em]"
           >
             Call studio
           </a>

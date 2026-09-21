@@ -35,7 +35,7 @@ function PlanCheckoutScreen() {
           <p className="mt-2 text-sm text-muted-foreground">
             {money(price)} / {cycle === "quarterly" ? "quarter" : "month"} · {plan.sessionsPerMonth} sessions each month
           </p>
-          <ul className="mt-4 space-y-1 text-sm text-cream/90">
+          <ul className="mt-4 space-y-1 text-sm text-muted-foreground">
             {plan.features.map((f) => (
               <li key={f}>· {f}</li>
             ))}

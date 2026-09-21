@@ -39,17 +39,17 @@ function MessagesScreen() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search conversations"
-        className="mb-4 min-h-12 w-full border border-border bg-card px-4 text-sm outline-none placeholder:text-muted-foreground"
+        className="mb-4 min-h-12 w-full rounded-2xl border border-border bg-card px-4 text-sm outline-none placeholder:text-muted-foreground"
       />
-      <div className="space-y-2">
+      <div className="space-y-3">
         {threads.map(({ thread, last, unread }) => (
           <Link
             key={thread.id}
             to="/messages/$threadId"
             params={{ threadId: thread.id }}
-            className="flex items-center gap-3 border border-border bg-card p-4"
+            className="flex items-center gap-3 rounded-2xl border border-border/80 bg-card/90 p-4 shadow-soft"
           >
-            <img src={thread.photo} alt="" className="h-12 w-12 object-cover" />
+            <img src={thread.photo} alt="" className="h-12 w-12 rounded-2xl object-cover" />
             <div className="min-w-0 flex-1">
               <div className="flex items-baseline justify-between gap-2">
                 <p className="font-medium">{thread.title}</p>
@@ -61,7 +61,7 @@ function MessagesScreen() {
                 {last?.text ?? thread.subtitle}
               </p>
             </div>
-            {unread && <span className="h-2 w-2 shrink-0 bg-primary" aria-label="Unread" />}
+            {unread && <span className="h-2 w-2 shrink-0 rounded-full bg-primary" aria-label="Unread" />}
           </Link>
         ))}
         {threads.length === 0 && (

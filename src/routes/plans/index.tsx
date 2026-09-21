@@ -20,7 +20,7 @@ function PlansScreen() {
     <Screen tabPad className="pt-0">
       <Header title="Choose Your Plan" subtitle="Ongoing support, priced for consistency" fallbackTo="/home" />
       <FadeIn>
-        <div className="mb-6 grid grid-cols-2 border border-border">
+        <div className="mb-6 grid grid-cols-2 overflow-hidden rounded-2xl border border-border bg-card">
           {(["monthly", "quarterly"] as const).map((c) => (
             <button
               key={c}
@@ -42,7 +42,7 @@ function PlansScreen() {
             return (
               <Card key={plan.id} className="relative">
                 {"popular" in plan && plan.popular && (
-                  <span className="absolute right-3 top-3 bg-primary px-2 py-1 text-[10px] uppercase tracking-[0.14em] text-primary-foreground">
+                  <span className="absolute right-3 top-3 rounded-full bg-primary px-2 py-1 text-[10px] uppercase tracking-[0.14em] text-primary-foreground">
                     Most Popular
                   </span>
                 )}
@@ -58,7 +58,7 @@ function PlansScreen() {
                 </p>
                 <ul className="mt-4 space-y-2">
                   {plan.features.map((f) => (
-                    <li key={f} className="flex gap-2 text-sm text-cream/90">
+                    <li key={f} className="flex gap-2 text-sm text-muted-foreground">
                       <Check size={16} className="mt-0.5 shrink-0 text-primary" />
                       {f}
                     </li>

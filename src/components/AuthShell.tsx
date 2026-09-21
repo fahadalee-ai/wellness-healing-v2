@@ -4,6 +4,7 @@ import { useState, type InputHTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { Field, inputClass } from "@/components/kit";
 import { Logo, Wordmark } from "@/components/Logo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { PHOTOS } from "@/lib/images";
 
 export function AuthShell({
@@ -13,9 +14,10 @@ export function AuthShell({
   footer,
   showBack = true,
   showLogo = true,
-  logoClassName = "h-20 w-20",
+  logoClassName = "h-16 w-16",
   background = PHOTOS.windowPortrait,
   fallbackTo = "/login",
+  compact,
 }: {
   title: string;
   subtitle?: string;
@@ -26,40 +28,54 @@ export function AuthShell({
   logoClassName?: string;
   background?: string;
   fallbackTo?: "/login" | "/onboarding";
+  compact?: boolean;
 }) {
   const router = useRouter();
   const canGoBack = useCanGoBack();
 
   return (
-    <div className="relative min-h-dvh overflow-hidden bg-background">
-      <img src={background} alt="" className="absolute inset-0 h-full w-full object-cover" />
-      <div className="absolute inset-0 bg-[#141312]/78" />
-      <div className="relative z-10 min-h-dvh overflow-y-auto no-scrollbar px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(1.25rem,env(safe-area-inset-top))]">
-        {showBack ? (
-          <button
-            type="button"
-            aria-label="Go back"
-            onClick={() => (canGoBack ? router.history.back() : router.navigate({ to: fallbackTo }))}
-            className="mb-4 flex h-12 w-12 items-center justify-center border border-cream/25 bg-[#141312]/40 text-foreground"
-          >
-            <ArrowLeft size={18} strokeWidth={1.75} />
-          </button>
-        ) : (
-          <div className="h-2" />
-        )}
+    <div className="ambient-wash relative min-h-dvh overflow-y-auto no-scrollbar">
+      <div className={cn("relative overflow-hidden", compact ? "h-[22vh] min-h-36" : "h-[28vh] min-h-44")}>
+        <img
+          src={background}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover object-[center_16%]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background" />
+        <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-5 pt-[max(0.85rem,env(safe-area-inset-top))]">
+          {showBack ? (
+            <button
+              type="button"
+              aria-label="Go back"
+              onClick={() => (canGoBack ? router.history.back() : router.navigate({ to: fallbackTo }))}
+              className="flex h-11 w-11 items-center justify-center rounded-2xl border border-border bg-card/90 text-foreground shadow-soft"
+            >
+              <ArrowLeft size={18} strokeWidth={1.75} />
+            </button>
+          ) : (
+            <div className="h-11 w-11" />
+          )}
+          <ThemeToggle className="h-11 w-11" />
+        </div>
+      </div>
 
+      <div className="relative z-10 -mt-8 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
         {showLogo && (
-          <div className="mb-6 flex flex-col items-center">
+          <div className="mb-2 flex flex-col items-center">
             <Logo className={logoClassName} />
-            <Wordmark className="mt-1" />
+            <Wordmark className="-mt-0.5" />
           </div>
         )}
 
-        <h1 className="text-center font-display text-3xl font-medium tracking-tight text-foreground">{title}</h1>
+        <h1 className="text-center font-display text-[1.7rem] font-medium leading-tight tracking-tight text-foreground">
+          {title}
+        </h1>
         {subtitle && (
-          <p className="mx-auto mt-2 max-w-xs text-center text-sm leading-relaxed text-cream/75">{subtitle}</p>
+          <p className="mx-auto mt-1 max-w-xs text-center text-sm leading-snug text-muted-foreground">{subtitle}</p>
         )}
-        <div className="mt-8">{children}</div>
+        <div className="mt-4 rounded-3xl border border-border/80 bg-card/85 p-4 shadow-soft backdrop-blur-md">
+          {children}
+        </div>
         {footer}
       </div>
     </div>
@@ -76,7 +92,7 @@ export function AuthInput({
       {icon && (
         <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">{icon}</span>
       )}
-      <input {...props} className={cn(inputClass, "bg-[#141312]/70", icon && "pl-10", className)} />
+      <input {...props} className={cn(inputClass, icon && "pl-10", className)} />
     </div>
   );
 }
@@ -107,33 +123,33 @@ export function PasswordField({
 export function SocialAuth({ onContinue }: { onContinue: () => void }) {
   return (
     <>
-      <div className="my-6 flex items-center gap-3 text-[10px] uppercase tracking-[0.18em] text-cream/70">
-        <span className="h-px flex-1 bg-cream/20" />
+      <div className="my-4 flex items-center gap-3 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+        <span className="h-px flex-1 bg-border" />
         or continue with
-        <span className="h-px flex-1 bg-cream/20" />
+        <span className="h-px flex-1 bg-border" />
       </div>
       <div className="grid grid-cols-2 gap-3">
         <button
           type="button"
           onClick={onContinue}
-          className="inline-flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-none border border-cream/25 bg-[#141312]/50 px-3 text-sm text-foreground hover:bg-[#141312]/70"
+          className="inline-flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-2xl border border-border bg-background/70 px-3 text-sm text-foreground hover:bg-muted"
         >
           <span className="inline-flex items-center gap-2">
             <GoogleMark />
             Google
           </span>
-          <span className="text-[10px] uppercase tracking-[0.14em] text-cream/70">Demo</span>
+          <span className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Demo</span>
         </button>
         <button
           type="button"
           onClick={onContinue}
-          className="inline-flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-none border border-cream/25 bg-[#141312]/50 px-3 text-sm text-foreground hover:bg-[#141312]/70"
+          className="inline-flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-2xl border border-border bg-background/70 px-3 text-sm text-foreground hover:bg-muted"
         >
           <span className="inline-flex items-center gap-2">
             <AppleMark />
             Apple
           </span>
-          <span className="text-[10px] uppercase tracking-[0.14em] text-cream/70">Demo</span>
+          <span className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Demo</span>
         </button>
       </div>
     </>

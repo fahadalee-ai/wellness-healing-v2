@@ -42,7 +42,7 @@ export function DatePicker({
           onClick={() =>
             setCursor((c) => (c.month === 0 ? { year: c.year - 1, month: 11 } : { year: c.year, month: c.month - 1 }))
           }
-          className="flex h-12 w-12 items-center justify-center border border-border"
+          className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-card"
         >
           <ChevronLeft size={16} />
         </button>
@@ -52,7 +52,7 @@ export function DatePicker({
             type="button"
             aria-label="Expand calendar"
             onClick={() => setExpanded((e) => !e)}
-            className="flex h-12 w-12 items-center justify-center border border-border"
+            className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-card"
           >
             <Maximize2 size={15} />
           </button>
@@ -62,7 +62,7 @@ export function DatePicker({
             onClick={() =>
               setCursor((c) => (c.month === 11 ? { year: c.year + 1, month: 0 } : { year: c.year, month: c.month + 1 }))
             }
-            className="flex h-12 w-12 items-center justify-center border border-border"
+            className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-card"
           >
             <ChevronRight size={16} />
           </button>
@@ -118,7 +118,7 @@ function DayChip({
       disabled={unavailable}
       onClick={() => onSelect(iso)}
       className={cn(
-        "border text-center transition-colors duration-200",
+        "rounded-2xl border text-center transition-colors duration-200",
         compact ? "flex h-10 items-center justify-center text-sm" : "min-w-[4.2rem] px-3 py-3",
         unavailable && "border-transparent text-muted-foreground/40",
         !unavailable && !selected && "border-border text-foreground",
@@ -169,7 +169,7 @@ export function TimeSlotPicker({
                     disabled={!slot.available}
                     onClick={() => onChange(slot.time)}
                     className={cn(
-                      "min-h-14 border px-3 py-2 text-left transition-colors duration-200",
+                      "min-h-14 rounded-2xl border px-3 py-2 text-left transition-colors duration-200",
                       !slot.available && "border-border bg-muted/40 text-muted-foreground/50",
                       slot.available && !selected && "border-primary/70 text-foreground",
                       selected && "border-primary bg-primary text-primary-foreground",

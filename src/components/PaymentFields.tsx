@@ -27,7 +27,7 @@ export function PaymentMethodList({
           <div
             key={method.id}
             className={cn(
-              "flex min-h-12 w-full items-center gap-2 border px-4 py-3",
+              "flex min-h-12 w-full items-center gap-2 rounded-2xl border px-4 py-3",
               selectedId === method.id ? "border-primary bg-primary/10" : "border-border bg-card",
             )}
           >
@@ -59,7 +59,7 @@ export function PaymentMethodList({
           Add New Card
         </button>
       ) : (
-        <div className="mt-4 border border-border bg-card p-4">
+        <div className="mt-4 rounded-2xl border border-border bg-card p-4">
           <Field label="Card Number">
             <Input value={card} onChange={(e) => setCard(e.target.value)} placeholder="ACCT-000015" inputMode="numeric" />
           </Field>

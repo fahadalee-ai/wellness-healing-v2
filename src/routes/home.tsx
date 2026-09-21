@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Bell, BookOpen, CalendarPlus, CreditCard, MessageCircle } from "lucide-react";
 import { useState } from "react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button, Card, JoinZoomButton, LinkButton, PageDots, Screen, SectionTitle, Stars } from "@/components/kit";
 import { resumeBookingTo } from "@/lib/booking";
 import { PHOTOS } from "@/lib/images";
@@ -24,7 +25,7 @@ export const Route = createFileRoute("/home")({
 
 const QUICK = [
   { to: "/book", label: "Book Session", icon: CalendarPlus },
-  { to: "/subscription", label: "My Subscription", icon: CreditCard },
+  { to: "/subscription", label: "Subscription", icon: CreditCard },
   { to: "/messages", label: "Messages", icon: MessageCircle },
   { to: "/resources", label: "Resources", icon: BookOpen },
 ] as const;
@@ -44,22 +45,25 @@ function HomeScreen() {
           <p className="font-display text-[1.35rem] leading-tight text-foreground">
             {greeting()}, {name}
           </p>
-          <p className="mt-1 text-sm text-cream">Here’s your space to grow</p>
+          <p className="mt-1 text-sm text-muted-foreground">Here’s your space to grow</p>
         </div>
-        <Link
-          to="/notifications"
-          aria-label="Notifications"
-          className="relative flex h-12 w-12 shrink-0 items-center justify-center border border-white text-white"
-        >
-          <Bell size={20} strokeWidth={1.75} />
-          {unread && <span className="absolute right-2 top-2 h-1.5 w-1.5 bg-primary" />}
-        </Link>
+        <div className="flex shrink-0 items-center gap-2">
+          <ThemeToggle />
+          <Link
+            to="/notifications"
+            aria-label="Notifications"
+            className="relative flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-card text-foreground"
+          >
+            <Bell size={20} strokeWidth={1.75} />
+            {unread && <span className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-primary" />}
+          </Link>
+        </div>
       </div>
 
-      <div className="relative mt-6 overflow-hidden rounded-[4px]">
+      <div className="relative mt-7 overflow-hidden rounded-3xl">
         <img src={PHOTOS.heroInterior} alt="Woman seated on a sunroom window ledge" className="h-52 w-full object-cover" />
-        <div className="absolute inset-0 bg-[#141312]/55" />
-        <div className="absolute inset-0 flex flex-col justify-end p-4">
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/15 to-transparent" />
+        <div className="absolute inset-0 flex flex-col justify-end p-5">
           <h2 className="font-display text-xl leading-snug text-cream">
             A Path Toward Healing, Clarity & Transformation
           </h2>
@@ -102,34 +106,34 @@ function HomeScreen() {
             <Link
               to="/sessions/reschedule"
               search={{ id: upcoming.id }}
-              className="inline-flex min-h-12 items-center justify-center border border-white bg-transparent text-[12px] font-medium uppercase tracking-[0.16em] text-white"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-border bg-transparent text-[12px] font-medium uppercase tracking-[0.14em] text-foreground"
             >
               Reschedule
             </Link>
           </div>
           {!canJoinZoom(upcoming.date, upcoming.time, upcoming.durationMin) && (
-            <p className="mt-3 text-xs leading-relaxed text-cream">
+            <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
               Join Zoom opens 15 minutes before your session.
             </p>
           )}
         </Card>
       )}
 
-      <div className="mt-6 flex gap-3 overflow-x-auto no-scrollbar">
+      <div className="mt-6 grid grid-cols-4 gap-2">
         {QUICK.map((item) => (
           <Link
             key={item.to}
             to={item.to}
-            className="flex min-w-[6.4rem] flex-col items-center gap-2 border border-border bg-card px-3 py-4 text-center"
+            className="flex flex-col items-center gap-2 rounded-2xl border border-border/80 bg-card px-1.5 py-3 text-center shadow-soft"
           >
             <item.icon size={18} className="text-primary" strokeWidth={1.6} />
-            <span className="text-[11px] leading-tight text-cream">{item.label}</span>
+            <span className="whitespace-nowrap text-[10px] leading-none text-muted-foreground">{item.label}</span>
           </Link>
         ))}
       </div>
 
       <SectionTitle>Choose the Support That Fits You</SectionTitle>
-      <div className="space-y-2">
+      <div className="space-y-3">
         {SERVICES.map((service) => (
           <Card
             key={service.id}
@@ -143,7 +147,7 @@ function HomeScreen() {
               <p className="font-medium text-foreground">{service.title}</p>
               <p className="mt-1 text-xs text-muted-foreground">{service.blurb}</p>
             </div>
-            <span className="ml-3 shrink-0 bg-primary px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-primary-foreground">
+            <span className="ml-3 shrink-0 rounded-full bg-primary px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-primary-foreground">
               Book Now
             </span>
           </Card>
@@ -151,7 +155,7 @@ function HomeScreen() {
       </div>
 
       <SectionTitle>Coaching for Where Life Meets Change</SectionTitle>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 gap-3">
         {PILLARS.map((p) => (
           <Card key={p.title} className="overflow-hidden p-0">
             <img src={p.image} alt={p.title} className="h-28 w-full object-cover" />
@@ -179,13 +183,13 @@ function HomeScreen() {
       >
         <Card>
           <div className="flex items-center gap-3">
-            <img src={TESTIMONIALS[quote].photo} alt={TESTIMONIALS[quote].name} className="h-12 w-12 object-cover" />
+            <img src={TESTIMONIALS[quote].photo} alt={TESTIMONIALS[quote].name} className="h-12 w-12 rounded-2xl object-cover" />
             <div>
               <p className="text-sm font-medium">{TESTIMONIALS[quote].name}</p>
               <Stars rating={TESTIMONIALS[quote].rating} />
             </div>
           </div>
-          <p className="mt-3 text-sm leading-relaxed text-cream/90">“{TESTIMONIALS[quote].quote}”</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">“{TESTIMONIALS[quote].quote}”</p>
         </Card>
         <PageDots count={TESTIMONIALS.length} index={quote} onChange={setQuote} label="Testimonial" />
       </div>
@@ -199,15 +203,17 @@ function HomeScreen() {
       >
         For the days in between
       </SectionTitle>
-      <div className="space-y-2">
+      <div className="space-y-3">
         {RESOURCES.slice(0, 2).map((item) => (
-          <Link key={item.id} to="/resources/$resourceId" params={{ resourceId: item.id }}>
-            <Card className="flex gap-3 overflow-hidden p-0">
-              <img src={item.image} alt={item.alt} className="h-24 w-24 object-cover" />
-              <div className="min-w-0 flex-1 py-3 pr-3">
+          <Link key={item.id} to="/resources/$resourceId" params={{ resourceId: item.id }} className="block">
+            <Card className="flex p-0">
+              <div className="h-[6.75rem] w-[5.75rem] shrink-0 overflow-hidden">
+                <img src={item.image} alt={item.alt} className="h-full w-full object-cover" />
+              </div>
+              <div className="min-w-0 flex-1 px-4 py-3.5">
                 <p className="text-[11px] uppercase tracking-[0.14em] text-primary">{item.category}</p>
-                <p className="mt-1 font-medium">{item.title}</p>
-                <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{item.excerpt}</p>
+                <p className="mt-1 font-medium leading-snug">{item.title}</p>
+                <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{item.excerpt}</p>
               </div>
             </Card>
           </Link>

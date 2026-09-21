@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { shouldShowTabs, TabBar } from "@/components/TabBar";
 import { isAuthEntryPath, isPublicPath } from "@/lib/auth-paths";
 import { useApp } from "@/lib/store";
+import { useTheme } from "@/lib/theme";
 
 function isPreviewPath(pathname: string) {
   const path = pathname.replace(/\/$/, "") || "/";
@@ -13,15 +14,16 @@ function isPreviewPath(pathname: string) {
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { toasts, dismissToast, hydrated, user } = useApp();
+  const { theme } = useTheme();
   const tabs = shouldShowTabs(pathname, !!user);
   const preview = isPreviewPath(pathname);
 
   if (preview) {
-    return <div className="min-h-dvh w-full bg-[#0b0b0c]">{children}</div>;
+    return <div className="min-h-dvh w-full bg-background">{children}</div>;
   }
 
   if (!hydrated && !isPublicPath(pathname)) {
-    return <div className="min-h-dvh w-full bg-background" />;
+    return <div className="min-h-dvh w-full ambient-wash" />;
   }
 
   if (hydrated && !user && !isPublicPath(pathname)) {
@@ -33,17 +35,17 @@ export function AppShell({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="mx-auto flex h-dvh max-h-dvh w-full max-w-[480px] flex-col overflow-hidden bg-background">
+    <div className="ambient-wash mx-auto flex h-dvh max-h-dvh w-full max-w-[480px] flex-col overflow-hidden">
       <main className="relative flex min-h-0 flex-1 flex-col overflow-y-auto no-scrollbar">{children}</main>
       {tabs && <TabBar />}
-      <Toaster theme="dark" position="top-center" />
+      <Toaster theme={theme} position="top-center" />
       <div className="pointer-events-none fixed inset-x-0 top-6 z-50 mx-auto flex max-w-[480px] flex-col items-center gap-2 px-4">
         {toasts.map((t) => (
           <button
             key={t.id}
             type="button"
             onClick={() => dismissToast(t.id)}
-            className="pointer-events-auto w-full border border-border bg-card px-4 py-3 text-left"
+            className="pointer-events-auto w-full rounded-2xl border border-border bg-card/95 px-4 py-3 text-left shadow-soft backdrop-blur-md"
           >
             <p className="text-sm text-foreground">{t.title}</p>
             {t.body && <p className="mt-0.5 text-xs text-muted-foreground">{t.body}</p>}

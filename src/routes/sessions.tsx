@@ -36,7 +36,7 @@ function SessionsScreen() {
   return (
     <Screen tabPad className="pt-0">
       <Header title="My Sessions" back={false} />
-      <div className="mb-5 grid grid-cols-3 border border-border">
+      <div className="mb-5 grid grid-cols-3 overflow-hidden rounded-2xl border border-border bg-card">
         {TABS.map((t) => (
           <button
             key={t}
@@ -104,7 +104,7 @@ function SessionsScreen() {
                       </button>
                     </div>
                     {!canJoinZoom(session.date, session.time, session.durationMin) && (
-                      <p className="mt-3 text-xs leading-relaxed text-cream">
+                      <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
                         Join Zoom opens 15 minutes before your session.
                       </p>
                     )}
@@ -175,7 +175,7 @@ function SessionsScreen() {
               key={n}
               type="button"
               onClick={() => setRating(n)}
-              className={cn("h-11 w-11", n <= rating ? "bg-primary" : "bg-muted")}
+              className={cn("h-11 w-11 rounded-2xl", n <= rating ? "bg-primary" : "bg-muted")}
               aria-label={`${n} stars`}
             />
           ))}
@@ -184,7 +184,7 @@ function SessionsScreen() {
           value={reviewText}
           onChange={(e) => setReviewText(e.target.value)}
           placeholder="Optional notes"
-          className="mt-4 min-h-24 w-full border border-border bg-background px-3 py-3 text-sm outline-none"
+          className="mt-4 min-h-24 w-full rounded-2xl border border-border bg-background px-3 py-3 text-sm outline-none"
         />
         <Button
           className="mt-4"

@@ -28,7 +28,7 @@ function ResourcesScreen() {
             type="button"
             onClick={() => setFilter(item)}
             className={cn(
-              "shrink-0 border px-3 py-2 text-[11px] uppercase tracking-[0.14em]",
+              "shrink-0 rounded-full border px-3 py-2 text-[11px] uppercase tracking-[0.14em]",
               filter === item
                 ? "border-primary bg-primary text-primary-foreground"
                 : "border-border bg-card text-muted-foreground",
@@ -57,7 +57,7 @@ function ResourcesScreen() {
                 <div className="relative">
                   <img src={item.image} alt={item.alt} className="h-40 w-full object-cover" />
                   {savedResources.includes(item.id) && (
-                    <span className="absolute right-3 top-3 bg-[#141312]/70 p-1.5 text-cream">
+                    <span className="absolute right-3 top-3 rounded-full bg-ink/60 p-1.5 text-cream">
                       <Bookmark size={14} fill="currentColor" />
                     </span>
                   )}

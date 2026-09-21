@@ -31,6 +31,7 @@ function RegisterScreen() {
       title="Create Your Account"
       subtitle="Begin your path toward healing and clarity"
       showLogo={false}
+      compact
       background={PHOTOS.sunroom}
     >
       <form noValidate onSubmit={submit}>
@@ -46,7 +47,7 @@ function RegisterScreen() {
         <PasswordField label="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <PasswordField label="Confirm Password" value={confirm} onChange={(e) => setConfirm(e.target.value)} />
 
-        <label className="mb-5 flex items-start gap-3 text-sm leading-relaxed text-cream">
+        <label className="mb-5 flex items-start gap-3 text-sm leading-relaxed text-muted-foreground">
           <input
             type="checkbox"
             checked={agreed}
@@ -68,17 +69,16 @@ function RegisterScreen() {
         <Button type="submit" full>
           Create Account
         </Button>
-        <p className="mt-3 text-center text-xs leading-relaxed text-cream/80">
+        <p className="mt-3 text-center text-sm text-muted-foreground">
+          Already have an account?{" "}
+          <Link to="/login" className="font-medium text-primary">
+            Log In
+          </Link>
+        </p>
+        <p className="mt-2 text-center text-xs leading-relaxed text-muted-foreground">
           Demo — details are stored on this device only
         </p>
       </form>
-
-      <p className="mt-8 text-center text-sm text-muted-foreground">
-        Already have an account?{" "}
-        <Link to="/login" className="text-primary">
-          Log In
-        </Link>
-      </p>
     </AuthShell>
   );
 }

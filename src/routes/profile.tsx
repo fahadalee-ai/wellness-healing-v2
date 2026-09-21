@@ -11,6 +11,7 @@ import {
   Shield,
   Wallet,
 } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Header, LinkButton, Row, Screen } from "@/components/kit";
 import { BUSINESS, initials } from "@/lib/mock-data";
 import { useApp } from "@/lib/store";
@@ -27,8 +28,8 @@ function ProfileScreen() {
   return (
     <Screen tabPad className="pt-0">
       <Header title="Profile" back={false} />
-      <div className="flex items-center gap-4 border border-border bg-card p-4">
-        <div className="flex h-16 w-16 items-center justify-center overflow-hidden bg-muted text-sm">
+      <div className="flex items-center gap-4 rounded-2xl border border-border/80 bg-card/90 p-5 shadow-soft">
+        <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-muted text-sm">
           {user?.avatar ? (
             <img src={user.avatar} alt="" className="h-full w-full object-cover" />
           ) : (
@@ -44,7 +45,15 @@ function ProfileScreen() {
         Edit Profile
       </LinkButton>
 
-      <div className="mt-6">
+      <div className="mt-8 rounded-2xl border border-border/80 bg-card/90 p-5 shadow-soft">
+        <p className="font-display text-xl">Appearance</p>
+        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+          A soothing light mode for the day, and a low-light evening mode for later.
+        </p>
+        <ThemeToggle variant="segment" className="mt-4" />
+      </div>
+
+      <div className="mt-6 rounded-2xl border border-border/80 bg-card/90 px-4 shadow-soft">
         <Row icon={<CalendarDays size={18} />} label="My Sessions" to="/sessions" />
         <Row icon={<CreditCard size={18} />} label="My Subscription" to="/subscription" />
         <Row icon={<Wallet size={18} />} label="Payment Methods" to="/payment-methods" />

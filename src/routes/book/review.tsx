@@ -61,7 +61,7 @@ function ReviewScreen() {
 
         <Card className="mt-4">
           {covered && subscription ? (
-            <p className="text-sm leading-relaxed text-cream">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               {draft.serviceId === "one-on-one"
                 ? `Covered by ${subscription.planName} — ${subscription.sessionsUsed + 1} of ${subscription.sessionsIncluded} private sessions this month`
                 : `Covered by ${subscription.planName} — group sessions are included. ${remainingPlanSessions(subscription)} private sessions remain.`}
