@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
 
 function SplashScreen() {
   const navigate = useNavigate();
-  const { hydrated, user, onboarded } = useApp();
+  const { hydrated } = useApp();
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -27,17 +27,9 @@ function SplashScreen() {
       const fallback = window.setTimeout(() => navigate({ to: "/onboarding" }), 600);
       return () => window.clearTimeout(fallback);
     }
-    if (user) {
-      navigate({ to: user.intakeComplete ? "/home" : "/intake" });
-      return undefined;
-    }
-    if (onboarded) {
-      navigate({ to: "/login" });
-      return undefined;
-    }
     navigate({ to: "/onboarding" });
     return undefined;
-  }, [ready, hydrated, user, onboarded, navigate]);
+  }, [ready, hydrated, navigate]);
 
   function advance() {
     setReady(true);
@@ -60,10 +52,10 @@ function SplashScreen() {
           <Logo
             variant="sage"
             knockOut={false}
-            className="h-[140%] w-[140%] max-w-none object-contain"
+            className="h-[88%] w-[88%] object-contain"
           />
         </div>
-        <Wordmark className="animate-splash-wordmark mt-5 text-sm font-semibold tracking-[0.18em] text-foreground" />
+        <Wordmark className="animate-splash-wordmark mt-5 text-[15px] font-semibold tracking-[0.16em] text-foreground" />
         {ready && !hydrated && (
           <p className="mt-6 text-[12px] uppercase tracking-[0.16em] text-muted-foreground">Opening your space…</p>
         )}

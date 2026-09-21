@@ -503,8 +503,31 @@ export function initials(fullName: string) {
   return `${parts[0]?.[0] ?? ""}${parts[1]?.[0] ?? ""}`.toUpperCase();
 }
 
+export const STUDIO_TIMEZONE = "America/Los_Angeles";
+
+function partsInStudio(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: STUDIO_TIMEZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
+  const get = (type: Intl.DateTimeFormatPartTypes) => parts.find((p) => p.type === type)?.value ?? "";
+  const hour = get("hour") === "24" ? "00" : get("hour");
+  return {
+    year: get("year"),
+    month: get("month"),
+    day: get("day"),
+    hour,
+    minute: get("minute"),
+  };
+}
+
 export function greeting() {
-  const h = new Date().getHours();
+  const h = Number(partsInStudio().hour);
   if (h < 12) return "Good morning";
   if (h < 17) return "Good afternoon";
   return "Good evening";
@@ -532,14 +555,13 @@ export function formatTime(hhmm: string) {
   const [h, m] = hhmm.split(":").map(Number);
   const d = new Date();
   d.setHours(h, m, 0, 0);
-  return d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  const clock = d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  return `${clock} PT`;
 }
 
 export function todayIso() {
-  const d = new Date();
-  const month = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${d.getFullYear()}-${month}-${day}`;
+  const p = partsInStudio();
+  return `${p.year}-${p.month}-${p.day}`;
 }
 
 export function addDaysIso(iso: string, days: number) {
@@ -552,15 +574,35 @@ export function addDaysIso(iso: string, days: number) {
 
 export function localTimezoneLabel() {
   try {
-    const parts = new Intl.DateTimeFormat("en-US", { timeZoneName: "short" }).formatToParts(new Date());
-    return parts.find((p) => p.type === "timeZoneName")?.value ?? "local time";
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: STUDIO_TIMEZONE,
+      timeZoneName: "short",
+    }).formatToParts(new Date());
+    const name = parts.find((p) => p.type === "timeZoneName")?.value ?? "PT";
+    return `US Pacific Time (${name})`;
   } catch {
-    return "local time";
+    return "US Pacific Time (PT)";
   }
 }
 
+function studioDateToUtc(date: string, time: string) {
+  const [year, month, day] = date.split("-").map(Number);
+  const [hour, minute] = time.split(":").map(Number);
+  const utcGuess = Date.UTC(year, month - 1, day, hour, minute, 0);
+  const shown = partsInStudio(new Date(utcGuess));
+  const shownUtc = Date.UTC(
+    Number(shown.year),
+    Number(shown.month) - 1,
+    Number(shown.day),
+    Number(shown.hour),
+    Number(shown.minute),
+    0,
+  );
+  return new Date(utcGuess + (Date.UTC(year, month - 1, day, hour, minute, 0) - shownUtc));
+}
+
 export function canJoinZoom(date: string, time: string, durationMin = 50) {
-  const start = new Date(`${date}T${time}:00`);
+  const start = studioDateToUtc(date, time);
   if (Number.isNaN(start.getTime())) return false;
   const now = Date.now();
   const diffMin = (start.getTime() - now) / 60000;
@@ -593,6 +635,6 @@ export function slotsForDate(iso: string) {
 }
 
 function currentHm() {
-  const d = new Date();
-  return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+  const p = partsInStudio();
+  return `${p.hour.padStart(2, "0")}:${p.minute}`;
 }

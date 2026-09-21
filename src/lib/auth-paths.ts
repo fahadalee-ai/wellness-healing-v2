@@ -22,7 +22,7 @@ export function isPublicPath(pathname: string) {
 
 export function isAuthEntryPath(pathname: string) {
   const path = normalizePath(pathname);
-  return path === "/login" || path === "/register" || path === "/onboarding";
+  return path === "/login" || path === "/register";
 }
 
 export function shouldShowTabs(pathname: string, authed = false) {

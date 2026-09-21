@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { daysInMonth, formatTime, isDateUnavailable, localTimezoneLabel, slotsForDate, todayIso } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +17,18 @@ export function DatePicker({
     return { year: y, month: m - 1 };
   });
   const [expanded, setExpanded] = useState(false);
+  const selectedRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    if (!value) onChange(today);
+  }, [onChange, today, value]);
+
+  useEffect(() => {
+    selectedRef.current?.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+  }, [value, cursor, expanded]);
+
+  const now = new Date();
+  const canGoPrev = cursor.year > now.getFullYear() || (cursor.year === now.getFullYear() && cursor.month > now.getMonth());
 
   const days = useMemo(() => {
     const count = daysInMonth(cursor.year, cursor.month);
@@ -27,6 +39,8 @@ export function DatePicker({
     });
   }, [cursor]);
 
+  const stripDays = useMemo(() => days.filter((d) => d.iso >= today), [days, today]);
+
   const monthLabel = new Date(cursor.year, cursor.month, 1).toLocaleDateString("en-US", {
     month: "long",
     year: "numeric",
@@ -34,15 +48,16 @@ export function DatePicker({
 
   return (
     <div>
-      <p className="text-xs text-muted-foreground">Times shown in your local timezone: {localTimezoneLabel()}</p>
+      <p className="text-xs text-muted-foreground">Times shown in {localTimezoneLabel()}</p>
       <div className="mt-4 flex items-center justify-between">
         <button
           type="button"
           aria-label="Previous month"
+          disabled={!canGoPrev}
           onClick={() =>
             setCursor((c) => (c.month === 0 ? { year: c.year - 1, month: 11 } : { year: c.year, month: c.month - 1 }))
           }
-          className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-card"
+          className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-card disabled:opacity-30"
         >
           <ChevronLeft size={16} />
         </button>
@@ -81,14 +96,28 @@ export function DatePicker({
               <span key={`pad-${i}`} />
             ))}
             {days.map((d) => (
-              <DayChip key={d.iso} {...d} selected={value === d.iso} onSelect={onChange} compact />
+              <DayChip
+                key={d.iso}
+                {...d}
+                selected={(value ?? today) === d.iso}
+                today={d.iso === today}
+                onSelect={onChange}
+                compact
+              />
             ))}
           </div>
         </div>
       ) : (
         <div className="mt-4 flex gap-2 overflow-x-auto no-scrollbar pb-1">
-          {days.map((d) => (
-            <DayChip key={d.iso} {...d} selected={value === d.iso} onSelect={onChange} />
+          {stripDays.map((d) => (
+            <DayChip
+              key={d.iso}
+              ref={(value ?? today) === d.iso ? selectedRef : undefined}
+              {...d}
+              selected={(value ?? today) === d.iso}
+              today={d.iso === today}
+              onSelect={onChange}
+            />
           ))}
         </div>
       )}
@@ -101,19 +130,24 @@ function DayChip({
   iso,
   unavailable,
   selected,
+  today,
   onSelect,
   compact,
+  ref,
 }: {
   day: number;
   iso: string;
   unavailable: boolean;
   selected: boolean;
+  today?: boolean;
   onSelect: (iso: string) => void;
   compact?: boolean;
+  ref?: React.Ref<HTMLButtonElement>;
 }) {
   const weekday = new Date(`${iso}T12:00:00`).toLocaleDateString("en-US", { weekday: "short" });
   return (
     <button
+      ref={ref}
       type="button"
       disabled={unavailable}
       onClick={() => onSelect(iso)}
@@ -122,6 +156,7 @@ function DayChip({
         compact ? "flex h-10 items-center justify-center text-sm" : "min-w-[4.2rem] px-3 py-3",
         unavailable && "border-transparent text-muted-foreground/40",
         !unavailable && !selected && "border-border text-foreground",
+        !unavailable && !selected && today && "border-primary/50",
         selected && "border-primary bg-primary text-primary-foreground",
       )}
     >
