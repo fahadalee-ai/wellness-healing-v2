@@ -30,7 +30,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     return <Navigate to="/login" />;
   }
 
-  if (hydrated && user && isAuthEntryPath(pathname)) {
+  if (hydrated && user && isAuthEntryPath(pathname) && pathname !== "/login") {
     return <Navigate to={user.intakeComplete ? "/home" : "/intake"} />;
   }
 

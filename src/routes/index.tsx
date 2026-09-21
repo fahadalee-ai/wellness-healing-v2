@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
 
 function SplashScreen() {
   const navigate = useNavigate();
-  const { hydrated } = useApp();
+  const { hydrated, user, logout } = useApp();
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -27,9 +27,10 @@ function SplashScreen() {
       const fallback = window.setTimeout(() => navigate({ to: "/onboarding" }), 600);
       return () => window.clearTimeout(fallback);
     }
+    if (user) logout();
     navigate({ to: "/onboarding" });
     return undefined;
-  }, [ready, hydrated, navigate]);
+  }, [ready, hydrated, user, logout, navigate]);
 
   function advance() {
     setReady(true);
