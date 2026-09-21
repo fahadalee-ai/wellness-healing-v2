@@ -21,6 +21,7 @@ function ForgotPasswordScreen() {
         title="Check your inbox"
         subtitle="A reset link is on its way if this email is on file."
         showLogo={false}
+        compact
         background={PHOTOS.duskLandscape}
       >
         <div className="flex flex-col items-center py-6 text-center">
@@ -43,6 +44,7 @@ function ForgotPasswordScreen() {
       title="Reset Your Password"
       subtitle="Enter your email and we’ll send you a reset link"
       showLogo={false}
+      compact
       background={PHOTOS.duskLandscape}
     >
       <form
